@@ -3,103 +3,114 @@ import "./Login.css";
 import logo1 from "../../Assets/logo.jpg";
 import axios from "axios";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+class Login extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      userData: null,
+      token: null,
+    };
+  }
 
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
+  handleAuth = async (event) => {
+    event.preventDefault();
 
-  const handleChangePass = async (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:7000/auth", {
-        email,
-        password,
-      });
+      let url = "http://localhost:7000/auth";
+      let input = {
+        email: "",
+        password: "",
+      };
+      const response = await axios.post(url, input);
+      const data = await response.data;
+      console.log(input);
 
-      if (response.data.success) {
-        console.log("Login successful : ", response.data);
+      if (data.success) {
+        this.setState({ userData: data.data, token: data.token });
       } else {
-        console.log("Login error : ", response.data.message);
+        this.setState({ errorMessage: data.message });
       }
     } catch (error) {
-      console.log("Login error : ", error);
+      console.log(error);
     }
   };
-  return (
-    <div>
-      <div class="background"></div>
 
-      <div class="content">
-        <div class="container-1">
-          <br />
-          <br />
-          <div class="box">
-            <div class="header">
-              <div class="text">
-                <h1> Local concepts with a</h1>
-                <h1> Global reach</h1>
+  render() {
+    return (
+      <div>
+        <div class="background"></div>
+
+        <div class="content">
+          <div class="container-1">
+            <br />
+            <br />
+            <div class="box">
+              <div class="header">
+                <div class="text">
+                  <h1> Local concepts with a</h1>
+                  <h1> Global reach</h1>
+                </div>
+                <div class="logo1">
+                  <img src={logo1} className="logo2" alt="logo1"></img>
+                </div>
               </div>
-              <div class="logo1">
-                <img src={logo1} className="logo2" alt="logo1"></img>
-              </div>
-            </div>
-            <div class="form">
-              <div class="item">
-                <form onSubmit={this.handleSubmit}>
-                  <label class="tittle">
-                    Email
+              <div class="form">
+                <div class="item">
+                  <form onSubmit={this.handleAuth}>
+                    <label class="tittle">
+                      Email
+                      <br />
+                      <input
+                        class="form-login"
+                        type="email"
+                        placeholder="Insert Email"
+                        value={this.state.email}
+                        onChange={(e) =>
+                          this.setState({ email: e.target.value })
+                        }
+                      />
+                    </label>
                     <br />
-                    <input
-                      class="form-login"
-                      type="email"
-                      placeholder="Insert Email"
-                      value={this.state.value}
-                      onChange={this.handleChangeEmail}
-                    />
-                  </label>
+
+                    <label class="tittle">
+                      Password
+                      <br />
+                      <input
+                        class="form-login"
+                        type="Password"
+                        placeholder="Insert Password"
+                        value={this.state.password}
+                        onChange={(e) =>
+                          this.setState({ password: e.target.value })
+                        }
+                      />
+                    </label>
+                    <div class="col-sm-10 offset-2">
+                      <input type="checkbox" class="form-check-input" />{" "}
+                      Tampilkan Password
+                    </div>
+                    <br />
+                    <input class="submit-btn" type="submit" value="Login" />
+                  </form>
                   <br />
-
-                  <label class="tittle">
-                    Password
-                    <br />
-                    <input
-                      class="form-login"
-                      type="Password"
-                      placeholder="Insert Password"
-                      value={this.state.value}
-                      onChange={this.handleChangePass}
-                    />
-                  </label>
-                  <div class="col-sm-10 offset-2">
-                    <input type="checkbox" class="form-check-input" /> Tampilkan
-                    Password
+                  <div>
+                    Belum memiliki akun?{" "}
+                    <a href="#" class="text-decoration-none">
+                      {" "}
+                      Sign In
+                    </a>
                   </div>
-                  <br />
-                  <input class="submit-btn" type="submit" value="Login" />
-                </form>
-                <br />
-                <div>
-                  Belum memiliki akun?{" "}
-                  <a href="#" class="text-decoration-none">
-                    {" "}
-                    Sign In
-                  </a>
                 </div>
               </div>
             </div>
+            <br />
+            <br />
           </div>
-          <br />
-          <br />
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 export default Login;
