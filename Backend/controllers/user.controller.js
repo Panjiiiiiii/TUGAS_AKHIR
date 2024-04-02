@@ -60,7 +60,6 @@ exports.addUser = async (req, res) => {
     }
 
     let newUser = {
-      nama_user : req.body.nama_user,
       username: req.body.username,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
@@ -169,7 +168,6 @@ exports.register = async (req, res) => {
     }
 
     let newUser = {
-      nama_user : req.body.nama_user,
       username: req.body.username,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),

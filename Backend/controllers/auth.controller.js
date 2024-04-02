@@ -6,38 +6,51 @@ const secret = `user`;
 const authenticate = async (req, res) => {
   let dataLogin = {
     email: req.body.email,
-    password: req.body.password 
+    password: req.body.password,
   };
 
-  let dataUser = await userModel.findOne({ where: {email : dataLogin.email} });
-
-  if(dataUser == null){
-    return res.status(500).json({
-      message : `Email or password not match`
-    })
-  }
-
-  const valid = await bcrypt.compare(dataLogin.password, dataUser.password)
-
-  if (valid) {
-    let payLoad = JSON.stringify(dataUser);
-    console.log(payLoad);
-
-    let token = jwt.sign(payLoad, secret);
-
-    return res.json({
-      succsess: true,
-      logged: true,
-      message: `Authentication Success`,
-      token: token,
-      data: dataUser,
+  if (!dataLogin.email || !dataLogin.password) {
+    return res.status(400).json({
+      succsess: false,
+      logged: false,
+      message: "Missing email or password",
     });
   }
-  return res.status(500).json({
-    succsess: false,
-    logged: false,
-    message: `Authetication failed`,
-  });
+
+  try {
+    let dataUser = await userModel.findOne({
+      where: { email: dataLogin.email },
+    });
+
+    if (!dataUser) {
+      return res.status(401).json({
+        message: `Email or password not match`,
+      });
+    }
+    const valid = await bcrypt.compare(dataLogin.password, dataUser.password);
+    if (valid) {
+      let payLoad = JSON.stringify(dataUser);
+      console.log(payLoad);
+
+      let token = jwt.sign(payLoad, secret);
+
+      return res.json({
+        succsess: true,
+        logged: true,
+        message: `Authentication Success`,
+        token: token,
+        data: dataUser,
+      });
+    }
+    return res.status(500).json({
+      succsess: false,
+      logged: false,
+      message: `Email or password false`,
+    });
+  } catch (error) {
+    console.log(error)
+  }
+
 };
 
 const authorize = (req, res, next) => {

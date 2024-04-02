@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Login.css";
 import logo1 from "../../Assets/logo.jpg";
 import axios from "axios";
@@ -20,17 +20,19 @@ class Login extends React.Component {
     try {
       let url = "http://localhost:7000/auth";
       let input = {
-        email: "",
-        password: "",
+        email: this.state.email,
+        password: this.state.password,
       };
       const response = await axios.post(url, input);
       const data = await response.data;
-      console.log(input);
+      // console.log(input);
 
-      if (data.success) {
-        this.setState({ userData: data.data, token: data.token });
+      if (data) {
+        sessionStorage.setItem("Token : ", data.token)
+        localStorage.setItem("Data user : ", JSON.stringify(data.data))
+        // window.href("/")
       } else {
-        this.setState({ errorMessage: data.message });
+        this.setState({errorMessage : data.Message})
       }
     } catch (error) {
       console.log(error);
@@ -42,28 +44,28 @@ class Login extends React.Component {
       <div>
         <div class="background"></div>
 
-        <div class="content">
-          <div class="container-1">
+        <div className="content">
+          <div className="container-1">
             <br />
             <br />
-            <div class="box">
-              <div class="header">
-                <div class="text">
+            <div className="box">
+              <div className="header">
+                <div className="text">
                   <h1> Local concepts with a</h1>
                   <h1> Global reach</h1>
                 </div>
-                <div class="logo1">
+                <div className="logo1">
                   <img src={logo1} className="logo2" alt="logo1"></img>
                 </div>
               </div>
-              <div class="form">
-                <div class="item">
+              <div className="form">
+                <div className="item">
                   <form onSubmit={this.handleAuth}>
-                    <label class="tittle">
+                    <label className="tittle">
                       Email
                       <br />
                       <input
-                        class="form-login"
+                        className="form-login"
                         type="email"
                         placeholder="Insert Email"
                         value={this.state.email}
@@ -74,11 +76,11 @@ class Login extends React.Component {
                     </label>
                     <br />
 
-                    <label class="tittle">
+                    <label className="tittle">
                       Password
                       <br />
                       <input
-                        class="form-login"
+                        className="form-login"
                         type="Password"
                         placeholder="Insert Password"
                         value={this.state.password}
@@ -87,12 +89,12 @@ class Login extends React.Component {
                         }
                       />
                     </label>
-                    <div class="col-sm-10 offset-2">
+                    <div className="col-sm-10 offset-2">
                       <input type="checkbox" class="form-check-input" />{" "}
                       Tampilkan Password
                     </div>
                     <br />
-                    <input class="submit-btn" type="submit" value="Login" />
+                    <input className="submit-btn" type="submit" value="Login" />
                   </form>
                   <br />
                   <div>

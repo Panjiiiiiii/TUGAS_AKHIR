@@ -9,9 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nama_user: {
-        type: Sequelize.STRING
-      },
       foto: {
         type: Sequelize.TEXT
       },
