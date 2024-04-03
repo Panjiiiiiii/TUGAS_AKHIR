@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
@@ -7,9 +7,23 @@ import logo from "../../Assets/logo.jpg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const StoredToken = sessionStorage.getItem("Token");
+    setIsLoggedIn(!!StoredToken);
+  });
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("Token:");
+    localStorage.removeItem("Datauser:");
+    setIsLoggedIn(false);
   };
 
   return (
@@ -53,16 +67,22 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="menu-buttons">
-            <button className="btn" onClick={toggleMenu}>
-              <Link to="/Login">Login</Link>
-            </button>
-
-            <button className="btn" onClick={toggleMenu}>
-              <Link to="/signup">Sign Up</Link>
-            </button>
+            {isLoggedIn ? (
+              <button className="btn" onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <>
+                <button className="btn" onClick={toggleMenu}>
+                  <Link to="/Login">Login</Link>
+                </button>
+                <button className="btn" onClick={toggleMenu}>
+                  <Link to="/signup">Sign up</Link>
+                </button>
+              </>
+            )}
           </div>
         </div>
-
         <div className="menu-icon" onClick={toggleMenu}>
           {isOpen ? <ImCross /> : <FaBars />}
         </div>
