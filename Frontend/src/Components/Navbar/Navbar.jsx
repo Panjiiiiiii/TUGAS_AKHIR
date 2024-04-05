@@ -8,22 +8,22 @@ import logo from "../../Assets/logo.jpg";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const navigate = useNavigate();
+  const navigate = useNavigate
 
   useEffect(() => {
-    const StoredToken = sessionStorage.getItem("Token");
-    setIsLoggedIn(!!StoredToken);
-  });
+    const storedToken = sessionStorage.getItem("Token")
+    setIsLoggedIn(!!storedToken)
+  }, [])
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("Token:");
-    localStorage.removeItem("Datauser:");
+    sessionStorage.removeItem("Token");
+    localStorage.removeItem("Datauser");
     setIsLoggedIn(false);
+    navigate("/Login")
   };
 
   return (
