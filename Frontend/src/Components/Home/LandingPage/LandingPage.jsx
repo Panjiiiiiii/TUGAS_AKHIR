@@ -7,6 +7,7 @@ import axios from "axios";
 
 const LandingPage = () => {
   const [tipeKamar, setTypeKamar] = useState([]);
+  const [selectedRoomType, setSelectedRoomType] = useState("");
 
   useEffect(() => {
     getTypeKamar();
@@ -16,15 +17,24 @@ const LandingPage = () => {
     try {
       const url = "http://localhost:7000/tipe_kamar/";
       const response = await axios.get(url);
+      console.log(response); // Tampilkan respons dari server
       if (Array.isArray(response.data)) {
         setTypeKamar(response.data);
         console.log(response);
+        // Memilih opsi pertama sebagai nilai awal
+        if (response.data.length > 0) {
+          setSelectedRoomType(response.data[0].nama_tipe_kamar);
+        }
       } else {
         console.log("Data not found");
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleRoomTypeChange = (event) => {
+    setSelectedRoomType(event.target.value);
   };
 
   return (
@@ -46,9 +56,13 @@ const LandingPage = () => {
 
           <div className="roomGuest">
             <label htmlFor="roomGuest">Room type</label>
-            <select className="dropdown" id="roomGuest">
+            <select
+              className="dropdown"
+              id="roomGuest"
+              value={selectedRoomType}
+              onChange={handleRoomTypeChange}
+            >
               {tipeKamar.map((item, index) => (
-                // Perbaikan sintaks: tambahkan return di bawah ini
                 <option key={index} value={item.nama_tipe_kamar}>
                   {item.nama_tipe_kamar}
                 </option>
