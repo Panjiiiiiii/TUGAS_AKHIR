@@ -6,30 +6,25 @@ import img from "../../../Assets/content2.jpg";
 import axios from "axios";
 
 const LandingPage = () => {
-  const [tipeKamar, setTypeKamar] = useState([]);
+  const [typeKamar, setTypeKamar] = useState([]);
   const [selectedRoomType, setSelectedRoomType] = useState("");
 
   useEffect(() => {
-    getTypeKamar();
-  }, []);
+    getTypeKamar(); // Corrected here
+  },[]);
 
   const getTypeKamar = async () => {
     try {
       const url = "http://localhost:7000/tipe_kamar/";
       const response = await axios.get(url);
-      console.log(response); // Tampilkan respons dari server
-      if (Array.isArray(response.data)) {
-        setTypeKamar(response.data);
-        console.log(response);
-        // Memilih opsi pertama sebagai nilai awal
-        if (response.data.length > 0) {
-          setSelectedRoomType(response.data[0].nama_tipe_kamar);
-        }
-      } else {
-        console.log("Data not found");
+      const data = response.data;
+
+      if (data) {
+        setTypeKamar(data);
+        console.log("Data received",data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching room types", error);
     }
   };
 
@@ -62,11 +57,15 @@ const LandingPage = () => {
               value={selectedRoomType}
               onChange={handleRoomTypeChange}
             >
-              {tipeKamar.map((item, index) => (
-                <option key={index} value={item.nama_tipe_kamar}>
-                  {item.nama_tipe_kamar}
-                </option>
-              ))}
+              {typeKamar.length > 0 ? (
+                typeKamar.map((item, index) => (
+                  <option key={index} value={item.nama_tipe_kamar}>
+                    {item.nama_tipe_kamar}
+                  </option>
+                ))
+              ) : (
+                <option value="">Loading...</option>
+              )}
             </select>
           </div>
 
