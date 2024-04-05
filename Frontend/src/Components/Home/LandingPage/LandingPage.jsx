@@ -1,10 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./LandingPage.css";
 import header from "../../../Assets/header.jpg";
 import Carousel from "../../Carousel/Carousel";
 import img from "../../../Assets/content2.jpg";
+import axios from "axios";
 
 const LandingPage = () => {
+  const [tipeKamar, setTypeKamar] = useState([]);
+
+  useEffect(() => {
+    getTypeKamar();
+  }, []);
+
+  const getTypeKamar = async () => {
+    try {
+      const url = "http://localhost:7000/tipe_kamar/";
+      const response = await axios.get(url);
+      if (Array.isArray(response.data)) {
+        setTypeKamar(response.data);
+        console.log(response);
+      } else {
+        console.log("Data not found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="home">
       <div className="img">
@@ -23,13 +45,14 @@ const LandingPage = () => {
           </div>
 
           <div className="roomGuest">
-            <label htmlFor="roomGuest">Room & Guest</label>
+            <label htmlFor="roomGuest">Room type</label>
             <select className="dropdown" id="roomGuest">
-              <option value="javascript"></option>
-              <option value="room">Room</option>
-              <option value="tipekamar">Tipe Kamar</option>
-              <option value="nomorkamar">Nomor Kamar</option>
-              <option value="jumlahkamar">Jumlah Kamar</option>
+              {tipeKamar.map((item, index) => (
+                // Perbaikan sintaks: tambahkan return di bawah ini
+                <option key={index} value={item.nama_tipe_kamar}>
+                  {item.nama_tipe_kamar}
+                </option>
+              ))}
             </select>
           </div>
 
