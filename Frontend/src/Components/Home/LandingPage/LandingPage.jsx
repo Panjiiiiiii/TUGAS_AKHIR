@@ -20,7 +20,7 @@ const LandingPage = () => {
       const data = response.data;
 
       if (data) {
-        setTypeKamar(data);
+        setTypeKamar(data.data);
         console.log("Data received",data);
       }
     } catch (error) {
