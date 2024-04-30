@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
@@ -7,13 +7,7 @@ import logo from "../../Assets/logo.jpg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate
-
-  useEffect(() => {
-    const storedToken = sessionStorage.getItem("Token")
-    setIsLoggedIn(!!storedToken)
-  }, [])
+  const logged = localStorage.getItem("Data user")
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -21,9 +15,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("Token");
-    localStorage.removeItem("Datauser");
-    setIsLoggedIn(false);
-    navigate("/Login")
+    localStorage.removeItem("Data user");
+    window.location.href = "/Login"
   };
 
   return (
@@ -67,7 +60,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="menu-buttons">
-            {isLoggedIn ? (
+            {logged ? (
               <button className="btn" onClick={handleLogout}>
                 Logout
               </button>

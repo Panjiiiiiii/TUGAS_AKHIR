@@ -107,10 +107,10 @@ const LandingPage = () => {
             points that unlock travel experiences. Start your adventure at
             Marriott.com. Where will our journey together lead?
           </p>
-          <div className="link">
+          {/* <div className="link">
             <a href="../../Login/Login">Sign in </a>
             <a href="">Join Now </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
