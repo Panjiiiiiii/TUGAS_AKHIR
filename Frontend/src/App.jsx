@@ -28,7 +28,7 @@ const App = () => {
 
         <Route path="/Admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
-          <Route path="data-kamar" element={<Admin />} />
+          <Route path="DataKamar" element={<DataKamar />} />
         </Route>
       </Routes>
     </Router>
