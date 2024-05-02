@@ -6,12 +6,12 @@ const pemesananModel = require("../models/index").pemesanan;
 const detailModel = require("../models/index").detail_pemesanamn;
 const kamarModel = require("../models/index").kamar;
 const Op = require("sequelize").Op;
-const express = require('express')
+const express = require("express");
 
-const app = express()
+const app = express();
 
-app.use(bodyParser.json())
-app.use(express.json())
+app.use(bodyParser.json());
+app.use(express.json());
 
 //get pemesanan by user
 exports.getAllpemesanan = async (req, res) => {
@@ -167,41 +167,58 @@ app.post("/", async (req, res) => {
   }
 });
 
-exports.getCheckIn = async (req,res) => {
+exports.countTransaksi = async (req, res) => {
+  try {
+    let data = await sequelize.query(
+      `SELECT COUNT(id) as total_transaksi from pemesanans`
+    );
+    return res.json({
+      succsess: true,
+      datas: data[0],
+      message: `Datas have been loaded`,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+    });
+  }
+};
+
+exports.getCheckIn = async (req, res) => {
   try {
     let data = await sequelize.query(
       `SELECT COUNT(status_pemesanan) as check_in from pemesanans WHERE status_pemesanan = 'check_in'`
-    )
+    );
 
     return res.json({
-      succsess : true,
-      datas : data[0],
-      message : `Datas have been loaded`
-    })
+      succsess: true,
+      datas: data[0],
+      message: `Datas have been loaded`,
+    });
   } catch (error) {
     return res.json({
-      message : error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 
-exports.getCheckOut = async (req,res) => {
+exports.getCheckOut = async (req, res) => {
   try {
     let data = await sequelize.query(
       `SELECT COUNT(status_pemesanan) as check_out from pemesanans WHERE status_pemesanan = 'check_out'`
-    )
+    );
 
     return res.json({
-      succsess : true,
-      datas : data[0],
-      message : `Datas have been loaded`
-    })
+      succsess: true,
+      datas: data[0],
+      message: `Datas have been loaded`,
+    });
   } catch (error) {
     return res.json({
-      message : error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 //get pemesanan (user)
 
 //add pemesanan (user)

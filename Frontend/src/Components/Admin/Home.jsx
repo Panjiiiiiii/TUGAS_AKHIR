@@ -5,6 +5,7 @@ import axios from "axios";
 const Home = () => {
   const [checkInData, setCheckinData] = useState(0);
   const [checkOutData, setCheckoutData] = useState(0);
+  const [countTransaksi, setCountTransaksi] = useState(0);
   const [roomUsed, setroomUsed] = useState([]);
 
   const getRoomUsed = async () => {
@@ -34,7 +35,6 @@ const Home = () => {
 
   useEffect(() => {
     getRoomUsed();
-    console.log(roomUsed);
   }, []);
 
   const fetchdataCheckin = async () => {
@@ -95,6 +95,35 @@ const Home = () => {
     fetchdataCheckOut();
   }, []);
 
+  const countDataTransaksi = async () => {
+    try {
+      const token = sessionStorage.getItem("Token");
+
+      if (!token) {
+        throw new Error("No token found in sessionStorage");
+      }
+
+      const response = await axios.get(
+        "http://localhost:7000/pemesanan/SumTransaksi",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = response.data;
+      setCountTransaksi(data.datas[0].total_transaksi);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    countDataTransaksi()
+  }, []);
+
   return (
     <>
       <main className="main-container">
@@ -129,7 +158,7 @@ const Home = () => {
               <h3>Transaksi</h3>
               <IoBedOutline className="card_icon" />
             </div>
-            <h1>1</h1>
+            {countDataTransaksi && <h1>{countTransaksi}</h1>}
           </div>
 
           <div className="card">
