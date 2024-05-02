@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import "./Login.css";
 import logo1 from "../../Assets/logo.jpg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Mengimpor useNavigate
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate(); // Menggunakan useNavigate untuk mengarahkan pengguna
 
   const handleAuth = async (event) => {
     event.preventDefault();
@@ -22,16 +25,12 @@ const Login = () => {
       if (data) {
         sessionStorage.setItem("Token", data.token);
         localStorage.setItem("Data user", JSON.stringify(data.data));
+        setIsLoggedIn(true);
         alert("Login success");
-        if(data.data.role == "customer") {
-          window.location.href = '/'; // Menggunakan navigate dari useNavigate untuk mengarahkan pengguna ke halaman booking
-        } else {
-          window.location.href = '/admin'
-        }
+        navigate('/about'); // Menggunakan navigate dari useNavigate untuk mengarahkan pengguna ke halaman booking
       } else {
         alert("Login failed");
       }
-
     } catch (error) {
       alert("Error login");
       console.log(error);
@@ -40,21 +39,22 @@ const Login = () => {
 
   return (
     <div>
-      <div className="background"></div>
-      <div className="content">
+      <div className="background-2"> </div>
         <div className="container-1">
           <br />
           <br />
           <div className="box">
-            <div className="header">
-              <div className="text">
-                <h1> Local concepts with a</h1>
-                <h1> Global reach</h1>
+
+            <div className="header-1">
+              <div className="text-login">
+                <h1> Local concepts with a </h1>
+                <h1>Global reach</h1>
               </div>
               <div className="logo1">
                 <img src={logo1} className="logo2" alt="logo1"></img>
               </div>
             </div>
+
             <div className="form">
               <div className="item">
                 <form onSubmit={handleAuth}>
@@ -82,10 +82,10 @@ const Login = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </label>
-                  <div className="col-sm-10 offset-2">
+                  {/*<div className="col-sm-10 offset-2">
                     <input type="checkbox" className="form-check-input" />{" "}
                     Tampilkan Password
-                  </div>
+                  </div>*/}
                   <br />
                   <input
                     className="submit-btn"
@@ -108,7 +108,6 @@ const Login = () => {
           <br />
         </div>
       </div>
-    </div>
   );
 };
 
