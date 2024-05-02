@@ -9,6 +9,7 @@ import Booking from "./Components/Booking/Booking";
 import Admin from "./Admin";
 import AdminLayout from "./Components/Layouts/Admin";
 import DataKamar from "./Components/Admin/DataKamar";
+import Register from "./Components/Register/Register";
 import "./App.css";
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Gallery" element={<Gallery />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
         </Route>
 
 
