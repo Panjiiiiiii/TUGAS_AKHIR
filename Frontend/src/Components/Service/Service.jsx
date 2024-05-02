@@ -6,8 +6,8 @@ import Footer from "../Footer/Footer";
 
 
     return(
-
-    ) <>
+        <>
     </>
+    ) 
 
 export default Login;

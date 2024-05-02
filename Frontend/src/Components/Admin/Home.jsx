@@ -5,6 +5,7 @@ import axios from "axios";
 const Home = () => {
   const [checkInData, setCheckinData] = useState(0);
   const [checkOutData, setCheckoutData] = useState(0);
+  const [countTransaksi, setCountTransaksi] = useState(0);
   const [roomUsed, setroomUsed] = useState([]);
 
   const getRoomUsed = async () => {
@@ -31,14 +32,10 @@ const Home = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getRoomUsed();
-    console.log(roomUsed);
   }, []);
-
-  const handleChangerRoomUsed = (event) => {
-    setroomUsed(event.target.value);
-  };
 
   const fetchdataCheckin = async () => {
     try {
@@ -64,6 +61,7 @@ const Home = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchdataCheckin();
   }, []);
@@ -92,8 +90,38 @@ const Home = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchdataCheckOut();
+  }, []);
+
+  const countDataTransaksi = async () => {
+    try {
+      const token = sessionStorage.getItem("Token");
+
+      if (!token) {
+        throw new Error("No token found in sessionStorage");
+      }
+
+      const response = await axios.get(
+        "http://localhost:7000/pemesanan/SumTransaksi",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = response.data;
+      setCountTransaksi(data.datas[0].total_transaksi);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    countDataTransaksi()
   }, []);
 
   return (
@@ -130,20 +158,19 @@ const Home = () => {
               <h3>Transaksi</h3>
               <IoBedOutline className="card_icon" />
             </div>
-            <h1>1</h1>
+            {countDataTransaksi && <h1>{countTransaksi}</h1>}
           </div>
 
-          
-          <div className="bottom">
-            <div className="Staying">
+          <div className="card">
+            <div className="card-bot1">
               <h4>Currently Staying</h4>
               <hr />
-              <div className="staying-tittle">
+              <div className="title">
                 <h4 className>Name</h4>
                 <h4>Room</h4>
                 <h4>Check-In</h4>
               </div>
-              <div className="staying-tittle1">
+              <div className="subtitle">
                 {roomUsed.length > 0 ? (
                   roomUsed.slice(0, 1).map((item, index) => (
                     <>
@@ -162,98 +189,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-=======
-    <main className='main-container'>
-        <div className='main-cards'>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Kamar Tersedia</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>15</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Kamar Terpakai</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>4</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Kamar Kotor</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>2</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Transaksi</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>1</h1>
-            </div>
-
-            <div className='card'>
-                <div className='card-bot1'>
-                <h4>Currently Staying</h4>
-                  <hr />
-                  <div className="title">
-                  <h5>Name</h5>
-                  <h5>Room</h5>
-                  <h5>Check-In</h5>
-                  </div>
-                  
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                </div>
-                </div>
-        </div>
-
-        <div className='card'>
-                <div className='card-bot1'>
-                <h4>Check-Out</h4>
-                  <hr />
-                  <div className="title">
-                  <h5>Name</h5>
-                  <h5>Room</h5>
-                  <h5>Check-Out</h5>
-                  </div>
-                  
-                  <div className="subtitle">
-                  <p>Ms. Nourie</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                </div>
-                </div>
-        </div>
-
         </div>
       </main>
     </>
