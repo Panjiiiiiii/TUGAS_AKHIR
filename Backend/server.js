@@ -15,10 +15,12 @@ const userRoute = require("./routes/user.route");
 const tipeRoute = require("./routes/tipe_kamar.route")
 const auth = require("./routes/auth.route")
 const kamarRoute = require("./routes/kamar.route")
+const pemesanan = require("./routes/pemesanan.route")
 
 app.use("/user", userRoute);
 app.use("/tipe_kamar", tipeRoute)
 app.use("/kamar", kamarRoute)
+app.use("/pemesanan", pemesanan)
 app.use("/auth", auth)
 
 app.use(express.static(__dirname))
