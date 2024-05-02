@@ -31,6 +31,7 @@ const Home = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getRoomUsed();
     console.log(roomUsed);
@@ -64,6 +65,7 @@ const Home = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchdataCheckin();
   }, []);
@@ -92,6 +94,7 @@ const Home = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchdataCheckOut();
   }, []);
@@ -133,24 +136,23 @@ const Home = () => {
             <h1>1</h1>
           </div>
 
-          
           <div className="bottom">
             <div className="Staying">
               <h4>Currently Staying</h4>
               <hr />
               <div className="staying-tittle">
-                <h4 className>Name</h4>
+                <h4 className="name">Name</h4>
                 <h4>Room</h4>
                 <h4>Check-In</h4>
               </div>
               <div className="staying-tittle1">
                 {roomUsed.length > 0 ? (
                   roomUsed.slice(0, 1).map((item, index) => (
-                    <>
+                    <React.Fragment key={index}>
                       <p>{item.nama_tamu}</p>
-                      <p>{}</p>
+                      <p>{/* Tambahkan logika untuk menampilkan nomor kamar */}</p>
                       <p>{item.tgl_check_in}</p>
-                    </>
+                    </React.Fragment>
                   ))
                 ) : (
                   <>
@@ -162,98 +164,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-=======
-    <main className='main-container'>
-        <div className='main-cards'>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Kamar Tersedia</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>15</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Kamar Terpakai</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>4</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Kamar Kotor</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>2</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h4>Transaksi</h4>
-                    <IoBedOutline className='card_icon'/>
-                </div>
-                <h1>1</h1>
-            </div>
-
-            <div className='card'>
-                <div className='card-bot1'>
-                <h4>Currently Staying</h4>
-                  <hr />
-                  <div className="title">
-                  <h5>Name</h5>
-                  <h5>Room</h5>
-                  <h5>Check-In</h5>
-                  </div>
-                  
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                </div>
-                </div>
-        </div>
-
-        <div className='card'>
-                <div className='card-bot1'>
-                <h4>Check-Out</h4>
-                  <hr />
-                  <div className="title">
-                  <h5>Name</h5>
-                  <h5>Room</h5>
-                  <h5>Check-Out</h5>
-                  </div>
-                  
-                  <div className="subtitle">
-                  <p>Ms. Nourie</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                  </div>
-
-                  <div className="subtitle">
-                  <p>Ms. Sephora</p>
-                  <p>293</p>
-                  <p>2024.02.19 - 13:45:30</p>
-                </div>
-                </div>
-        </div>
-
         </div>
       </main>
     </>
