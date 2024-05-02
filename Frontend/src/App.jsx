@@ -8,6 +8,7 @@ import Login from "./Components/Login/Login";
 import Booking from "./Components/Booking/Booking";
 import Admin from "./Admin";
 import AdminLayout from "./Components/Layouts/Admin";
+import DataKamar from "./Components/Admin/DataKamar";
 import "./App.css";
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
 
         <Route path="/Admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
-          <Route path="data-kamar" element={<Admin />} />
+          <Route path="DataKamar" element={<DataKamar />} />
         </Route>
       </Routes>
     </Router>
