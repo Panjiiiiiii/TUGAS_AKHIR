@@ -8,6 +8,7 @@ import Login from "./Components/Login/Login";
 import Booking from "./Components/Booking/Booking";
 import Admin from "./Admin";
 import AdminLayout from "./Components/Layouts/Admin";
+import DataKamar from "./Components/Admin/DataKamar";
 import Register from "./Components/Register/Register";
 import "./App.css";
 
