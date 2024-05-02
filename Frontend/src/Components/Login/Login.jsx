@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom"; // Mengimpor useNavigate
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate(); // Menggunakan useNavigate untuk mengarahkan pengguna
 
   const handleAuth = async (event) => {
@@ -21,13 +20,20 @@ const Login = () => {
       };
       const response = await axios.post(url, input);
       const data = await response.data;
+      const role = data.data.role
 
       if (data) {
         sessionStorage.setItem("Token", data.token);
         localStorage.setItem("Data user", JSON.stringify(data.data));
-        setIsLoggedIn(true);
         alert("Login success");
-        navigate('/about'); // Menggunakan navigate dari useNavigate untuk mengarahkan pengguna ke halaman booking
+
+        if(role) {
+          if(data.data.role == "customer"){
+            window.location.href = '/'
+          } else {
+            window.location.href = '/admin'
+          }
+        }
       } else {
         alert("Login failed");
       }

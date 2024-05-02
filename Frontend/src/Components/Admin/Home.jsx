@@ -37,10 +37,6 @@ const Home = () => {
     console.log(roomUsed);
   }, []);
 
-  const handleChangerRoomUsed = (event) => {
-    setroomUsed(event.target.value);
-  };
-
   const fetchdataCheckin = async () => {
     try {
       const token = sessionStorage.getItem("Token");
@@ -136,23 +132,23 @@ const Home = () => {
             <h1>1</h1>
           </div>
 
-          <div className="bottom">
-            <div className="Staying">
+          <div className="card">
+            <div className="card-bot1">
               <h4>Currently Staying</h4>
               <hr />
-              <div className="staying-tittle">
-                <h4 className="name">Name</h4>
+              <div className="title">
+                <h4 className>Name</h4>
                 <h4>Room</h4>
                 <h4>Check-In</h4>
               </div>
-              <div className="staying-tittle1">
+              <div className="subtitle">
                 {roomUsed.length > 0 ? (
                   roomUsed.slice(0, 1).map((item, index) => (
-                    <React.Fragment key={index}>
+                    <>
                       <p>{item.nama_tamu}</p>
-                      <p>{/* Tambahkan logika untuk menampilkan nomor kamar */}</p>
+                      <p>{}</p>
                       <p>{item.tgl_check_in}</p>
-                    </React.Fragment>
+                    </>
                   ))
                 ) : (
                   <>
