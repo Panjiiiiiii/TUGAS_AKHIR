@@ -94,6 +94,7 @@ const aboutUs = () => {
       <hr />
       <div className="content2">
         <h2>Your Retreat Our Passion</h2>
+        
         <h5>
           Four Points by Sheraton is travel reinvented. Four Points serves as
           the center of where business meets pleasure, enabling guests to kick
