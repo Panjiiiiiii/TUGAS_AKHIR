@@ -163,9 +163,9 @@ exports.register = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: "Username already in use" });
     }
-    if (!req.file) {
-      return res.json({ message: "No uploaded file" });
-    }
+    // if (!req.file) {
+    //   return res.json({ message: "No uploaded file" });
+    // }
 
     let newUser = {
       username: req.body.username,
