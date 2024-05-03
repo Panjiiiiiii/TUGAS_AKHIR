@@ -1,6 +1,6 @@
 import React from 'react';
 import { CgProfile } from "react-icons/cg";
-import { Link } from 'react-router-dom'; // Import Link untuk routing di React Router
+import { Link } from 'react-router-dom'; 
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
   return (
@@ -15,32 +15,27 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
 
         <ul className='sidebar-list'>
           <li className='sidebar-list-item'>
-            <Link to=""> 
+            <Link to="/admin"> 
               <button className="sidebar-button">Dashboard</button>
             </Link>
           </li>
           <li className='sidebar-list-item'>
-            <Link to="/DataKamar"> 
+            <Link to="/admin/datakamar"> 
               <button className="sidebar-button">Data Kamar</button>
             </Link>
           </li>
           <li className='sidebar-list-item'>
-            <Link to="/transaksi"> 
+            <Link to="/admin/transaksi"> 
               <button className="sidebar-button">Transaksi</button>
             </Link>
           </li>
           <li className='sidebar-list-item'>
-            <Link to="/data-customer"> 
-              <button className="sidebar-button">Data Customer</button>
-            </Link>
-          </li>
-          <li className='sidebar-list-item'>
-            <Link to="/check-in"> 
+            <Link to="/admin/checkin"> 
               <button className="sidebar-button">Check In</button>
             </Link>
           </li>
           <li className='sidebar-list-item'>
-            <Link to="/check-out">
+            <Link to="/admin/checkout">
               <button className="sidebar-button">Check Out</button>
             </Link>
           </li>

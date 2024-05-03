@@ -314,3 +314,182 @@ margin: 12px;
     display: none;
   }
 }
+
+/* DataKamar */
+
+.data-kamar-options {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+}
+
+.search-input {
+  width: 36rem;
+  padding: 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-room-button {
+  padding: 8px 60px;
+  font-size: 16px;
+  background-color: #448343;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-room-button:hover {
+  background-color: #365a35;
+} 
+
+.room-table {
+  width: 100%;
+}
+
+.room-table th, .room-table td {
+  padding: 50px;
+}
+
+.room-table th {
+  background-color: #fff;
+}
+
+
+/* Transaksi */
+
+.transaksi-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+}
+
+.transaksi-table {
+  width: 100%;
+}
+
+.transaksi-table th, .transaksi-table td {
+  padding: 50px;
+}
+
+.transaksi-table th {
+  background-color: #fff;
+}
+
+/* CheckIn */
+
+/* CheckIn.css */
+
+/* Container styles */
+.checkin-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  grid-area: main;
+}
+
+/* Form styles */
+
+.checkin-form h2 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button styles */
+.button-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.checkin-button,
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkin-button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.checkin-button:hover {
+  background-color: #45a049;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Invoice styles */
+.invoice-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-container h2 {
+  margin-bottom: 20px;
+}
+
+.invoice-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoice-item {
+  margin-bottom: 10px;
+}
+
+.invoice-item span {
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .checkin-button,
+  .cancel-button {
+    width: 100%;
+  }
+
+  .invoice-item span {
+    display: block;
+  }
+}

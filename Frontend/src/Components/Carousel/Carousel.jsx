@@ -33,9 +33,9 @@ const Carousel = () => {
 
   return (
     <div className="App">
-      <div className="title">
+      <div className="title-one">
         <h1>Keys to Kicking Back</h1>
-        <p className="desk">
+        <p className="desk-one">
           Perfect the skill of savoring life's uncomplicated joys at Four
           Points.
         </p>
