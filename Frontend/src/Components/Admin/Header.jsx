@@ -7,7 +7,7 @@ function Header() {
     <header className='header'>
         <div className='header-right'>
             <IoNotifications className='icon'/>
-            <IoLogOutOutline className='icon'/> Log out
+            <a IoLogOutOutline className='icon' onClick={() => {window.location.href = '/login'}}>Log out</a> 
         </div>
     </header>
   )
