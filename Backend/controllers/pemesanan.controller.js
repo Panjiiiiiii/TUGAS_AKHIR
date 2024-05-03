@@ -1,9 +1,17 @@
+const bodyParser = require("body-parser");
+const { sequelize } = require("../models/index");
+
 const tipeModel = require("../models/index").tipe_kamar;
 const pemesananModel = require("../models/index").pemesanan;
 const detailModel = require("../models/index").detail_pemesanamn;
 const kamarModel = require("../models/index").kamar;
 const Op = require("sequelize").Op;
+const express = require("express");
 
+const app = express();
+
+app.use(bodyParser.json());
+app.use(express.json());
 
 //get pemesanan by user
 exports.getAllpemesanan = async (req, res) => {
@@ -14,6 +22,7 @@ exports.getAllpemesanan = async (req, res) => {
     message: `All datas have been loaded`,
   });
 };
+
 //get pemesanan by id
 app.get("/findById/:id", (req, res) => {
   pemesanan
@@ -157,6 +166,59 @@ app.post("/", async (req, res) => {
       });
   }
 });
+
+exports.countTransaksi = async (req, res) => {
+  try {
+    let data = await sequelize.query(
+      `SELECT COUNT(id) as total_transaksi from pemesanans`
+    );
+    return res.json({
+      succsess: true,
+      datas: data[0],
+      message: `Datas have been loaded`,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+    });
+  }
+};
+
+exports.getCheckIn = async (req, res) => {
+  try {
+    let data = await sequelize.query(
+      `SELECT COUNT(status_pemesanan) as check_in from pemesanans WHERE status_pemesanan = 'check_in'`
+    );
+
+    return res.json({
+      succsess: true,
+      datas: data[0],
+      message: `Datas have been loaded`,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+    });
+  }
+};
+
+exports.getCheckOut = async (req, res) => {
+  try {
+    let data = await sequelize.query(
+      `SELECT COUNT(status_pemesanan) as check_out from pemesanans WHERE status_pemesanan = 'check_out'`
+    );
+
+    return res.json({
+      succsess: true,
+      datas: data[0],
+      message: `Datas have been loaded`,
+    });
+  } catch (error) {
+    return res.json({
+      message: error.message,
+    });
+  }
+};
 //get pemesanan (user)
 
 //add pemesanan (user)

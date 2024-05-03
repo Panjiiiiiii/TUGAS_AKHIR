@@ -34,7 +34,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/about" onClick={toggleMenu}>
+              <Link to="/Booking" onClick={toggleMenu}>
                 Booking
               </Link>
             </li>
@@ -65,7 +65,7 @@ const Navbar = () => {
                   <Link to="/Login">Login</Link>
                 </button>
                 <button className="btn" onClick={toggleMenu}>
-                  <Link to="/signup">Sign up</Link>
+                  <Link to="/Register">Sign up</Link>
                 </button>
               </>
             )}

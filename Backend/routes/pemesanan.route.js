@@ -9,5 +9,8 @@ app.use(express.json());
 
 app.get("/getUser", authorize, isCustomer, validateUser, pemesanan.getAllpemesanan);
 app.get("/getAdmin", authorize, isAdmin, pemesanan.getAllpemesanan);
+app.get("/SumTransaksi", authorize, isAdmin, pemesanan.countTransaksi);
+app.get("/checkin", authorize, isAdmin, pemesanan.getCheckIn)
+app.get("/checkout", authorize, isAdmin, pemesanan.getCheckOut)
 
 module.exports = app;

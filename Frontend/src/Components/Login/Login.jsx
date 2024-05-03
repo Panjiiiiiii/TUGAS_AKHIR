@@ -18,21 +18,23 @@ const Login = () => {
       };
       const response = await axios.post(url, input);
       const data = await response.data;
+      const role = data.data.role;
 
       if (data) {
         sessionStorage.setItem("Token", data.token);
         localStorage.setItem("Data user", JSON.stringify(data.data));
-        const getUser = localStorage.getItem("customer")
         alert("Login success");
-        if(getUser) {
-          window.location.href = '/'; // Menggunakan navigate dari useNavigate untuk mengarahkan pengguna ke halaman booking
-        } else {
-          window.location.href = '/admin'
+
+        if (role) {
+          if (data.data.role == "customer") {
+            window.location.href = "/";
+          } else {
+            window.location.href = "/admin";
+          }
         }
       } else {
         alert("Login failed");
       }
-      
     } catch (error) {
       alert("Error login");
       console.log(error);
@@ -41,73 +43,68 @@ const Login = () => {
 
   return (
     <div>
-      <div className="background"></div>
-      <div className="content">
-        <div className="container-1">
-          <br />
-          <br />
-          <div className="box">
-            <div className="header">
-              <div className="text">
-                <h1> Local concepts with a</h1>
-                <h1> Global reach</h1>
-              </div>
-              <div className="logo1">
-                <img src={logo1} className="logo2" alt="logo1"></img>
-              </div>
+      <div className="background-2"> </div>
+      <div className="container-1">
+        <br />
+        <br />
+        <div className="box">
+          <div className="header-1">
+            <div className="text-login">
+              <h1> Local concepts with a </h1>
+              <h1>Global reach</h1>
             </div>
-            <div className="form">
-              <div className="item">
-                <form onSubmit={handleAuth}>
-                  <label className="tittle">
-                    Email
-                    <br />
-                    <input
-                      className="form-login"
-                      type="email"
-                      placeholder="Insert Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </label>
-                  <br />
+            <div className="logo1">
+              <img src={logo1} className="logo2" alt="logo1"></img>
+            </div>
+          </div>
 
-                  <label className="tittle">
-                    Password
-                    <br />
-                    <input
-                      className="form-login"
-                      type="Password"
-                      placeholder="Insert Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </label>
-                  <div className="col-sm-10 offset-2">
-                    <input type="checkbox" className="form-check-input" />{" "}
-                    Tampilkan Password
-                  </div>
+          <div className="form">
+            <div className="item">
+              <form onSubmit={handleAuth}>
+                <label className="tittle">
+                  Email
                   <br />
                   <input
-                    className="submit-btn"
-                    type="submit"
-                    value="Login"
+                    className="form-login"
+                    type="email"
+                    placeholder="Insert Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                </form>
+                </label>
                 <br />
-                <div>
-                  Belum memiliki akun?{" "}
-                  <a href="#" className="text-decoration-none">
-                    {" "}
-                    Sign In
-                  </a>
-                </div>
+
+                <label className="tittle">
+                  Password
+                  <br />
+                  <input
+                    className="form-login"
+                    type="Password"
+                    placeholder="Insert Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </label>
+                {/*<div className="col-sm-10 offset-2">
+                    <input type="checkbox" className="form-check-input" />{" "}
+                    Tampilkan Password
+                  </div>*/}
+                <br />
+                <input className="submit-btn" type="submit" value="Login" />
+              </form>
+              <br />
+              <div>
+                Belum memiliki akun?{" "}
+                <a href="#" className="text-decoration-none">
+                  {" "}
+                  Sign In
+                </a>
               </div>
             </div>
           </div>
-          <br />
-          <br />
         </div>
+        <br />
+        <br />
       </div>
     </div>
   );

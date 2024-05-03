@@ -12,6 +12,8 @@ import DataKamar from "./Components/Admin/DataKamar";
 import Transaksi from "./Components/Admin/Transaksi";
 import CheckIn from "./Components/Admin/CheckIn";
 import CheckOut from "./Components/Admin/CheckOut";
+
+import Register from "./Components/Register/Register";
 import "./App.css";
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Gallery" element={<Gallery />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
         </Route>
 
 
