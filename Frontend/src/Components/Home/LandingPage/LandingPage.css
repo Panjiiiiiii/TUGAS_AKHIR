@@ -10,7 +10,7 @@
   }
   
   img {
-    width: 102.5%;
+    width: 100%;
     height: auto;
     justify-content: center;
     align-items: center;
@@ -91,12 +91,23 @@
   }
   
   .textContent {
-    margin-top: 4rem; 
+    margin-top: 8rem; 
     font-size: 18px;
     text-align: center;
     margin-left: 10rem;
     margin-right: 10rem;
     margin-bottom: 20px;
+
+    h6{
+      font-size: 28px;
+      margin-bottom: 2rem;
+    }
+
+    h1{
+      font-size: 44px;
+    }
+
+    
   }
 
   .content3 .link{
@@ -110,6 +121,7 @@
 .content3{
   display: flex;
   gap: 4rem;
+  padding-top: 2rem;
   padding-bottom: 5rem;
 }
 
@@ -130,4 +142,12 @@ border-radius: 10px;
   font-size: 16px;
 }
  
+.text-last h1{
+  margin-bottom: 12px;
+
+}
+
+.link a{
+  text-decoration: none;
+}
   

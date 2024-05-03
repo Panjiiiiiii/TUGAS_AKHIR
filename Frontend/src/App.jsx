@@ -9,6 +9,10 @@ import Booking from "./Components/Booking/Booking";
 import Admin from "./Admin";
 import AdminLayout from "./Components/Layouts/Admin";
 import DataKamar from "./Components/Admin/DataKamar";
+import Transaksi from "./Components/Admin/Transaksi";
+import CheckIn from "./Components/Admin/CheckIn";
+import CheckOut from "./Components/Admin/CheckOut";
+
 import Register from "./Components/Register/Register";
 import "./App.css";
 
@@ -29,6 +33,9 @@ const App = () => {
         <Route path="/Admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
           <Route path="DataKamar" element={<DataKamar />} />
+          <Route path="Transaksi" element={<Transaksi />} />
+          <Route path="CheckIn" element={<CheckIn />} />
+          <Route path="CheckOut" element={<CheckOut />} />
         </Route>
       </Routes>
     </Router>

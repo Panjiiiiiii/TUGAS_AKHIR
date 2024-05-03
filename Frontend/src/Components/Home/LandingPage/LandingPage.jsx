@@ -75,9 +75,9 @@ const LandingPage = () => {
         </div>
       </section>
       <div className="textContent">
-        <h1 className="title1">Four Points</h1>
-        <h6 className="subttitle2">by Sheraton Munich Arabellapark</h6>
-        <p className="desk">
+        <h1>Four Points</h1>
+        <h6>by Sheraton Munich Arabellapark</h6>
+        <p>
           Discover our new hotel that combines Bavarian charm and a timeless
           design with local elements. Located a few subway stops from the city
           center and only a short walk from the English Garden, Munich’s famous
@@ -96,7 +96,7 @@ const LandingPage = () => {
           <img src={img} alt="" />
         </div>
 
-        <div className="text">
+        <div className="text-last">
           <h1>
             In the realm of 30 extraordinary Marriott Bonvoy hotel brands, Four
             Points is a standout.
@@ -107,10 +107,10 @@ const LandingPage = () => {
             points that unlock travel experiences. Start your adventure at
             Marriott.com. Where will our journey together lead?
           </p>
-          {/* <div className="link">
+          <div className="link">
             <a href="../../Login/Login">Sign in </a>
             <a href="">Join Now </a>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
