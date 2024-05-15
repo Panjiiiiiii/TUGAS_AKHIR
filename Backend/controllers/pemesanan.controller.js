@@ -7,6 +7,7 @@ const detailModel = require("../models/index").detail_pemesanamn;
 const kamarModel = require("../models/index").kamar;
 const Op = require("sequelize").Op;
 const express = require("express");
+const { where } = require("sequelize");
 
 const app = express();
 
@@ -23,6 +24,31 @@ exports.getAllpemesanan = async (req, res) => {
   });
 };
 
+exports.getAllCheckIn = async (req, res) => {
+  let pemesanan = await pemesananModel.findAll({
+    where: {
+      status_pemesanan: "check_in",
+    },
+  });
+  return res.json({
+    succsess: true,
+    data: pemesanan,
+    message: `All datas have been loaded`,
+  });
+};
+
+exports.getAllCheckOut = async (req, res) => {
+  let pemesanan = await pemesananModel.findAll({
+    where: {
+      status_pemesanan: "check_out",
+    },
+  });
+  return res.json({
+    succsess: true,
+    data: pemesanan,
+    message: `All datas have been loaded`,
+  });
+};
 //get pemesanan by id
 app.get("/findById/:id", (req, res) => {
   pemesanan
