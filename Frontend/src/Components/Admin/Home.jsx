@@ -7,6 +7,7 @@ const Home = () => {
   const [checkOutData, setCheckoutData] = useState(0);
   const [countTransaksi, setCountTransaksi] = useState(0);
   const [roomUsed, setroomUsed] = useState([]);
+  const [roomChekOut, setRoomCheckOut] = useState([])
 
   const getRoomUsed = async () => {
     try {
@@ -16,7 +17,7 @@ const Home = () => {
         throw new Error("No token found in sessionStorage");
       }
 
-      const url = "http://localhost:7000/pemesanan/getAdmin";
+      const url = "http://localhost:7000/pemesanan/getcheckin";
       const response = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -35,6 +36,35 @@ const Home = () => {
 
   useEffect(() => {
     getRoomUsed();
+  }, []);
+
+  const getChekOut = async () => {
+    try {
+      const token = sessionStorage.getItem("Token");
+
+      if (!token) {
+        throw new Error("No token found in sessionStorage");
+      }
+
+      const url = "http://localhost:7000/pemesanan/getcheckout";
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.data.data;
+
+      if (data) {
+        setRoomCheckOut(data);
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getChekOut();
   }, []);
 
   const fetchdataCheckin = async () => {
@@ -166,17 +196,46 @@ const Home = () => {
               <h4>Currently Staying</h4>
               <hr />
               <div className="title">
-                <h4 className>Name</h4>
-                <h4>Room</h4>
-                <h4>Check-In</h4>
+                <th>Name</th>
+                <th>Room</th>
+                <th>Check-In</th>
               </div>
               <div className="subtitle">
                 {roomUsed.length > 0 ? (
                   roomUsed.slice(0, 1).map((item, index) => (
                     <>
+                      <tb>{item.nama_tamu}</tb>
+                      <tb>{}</tb>
+                      <tb>{item.tgl_check_in}</tb>
+                    </>
+                  ))
+                ) : (
+                  <>
+                    <p>Loading...</p>
+                    <p>Loading...</p>
+                    <p>Loading...</p>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-bot1">
+              <h4>Currently Check-out</h4>
+              <hr />
+              <div className="title">
+                <h4 className>Name</h4>
+                <h4>Room</h4>
+                <h4>Check-out</h4>
+              </div>
+              <div className="subtitle">
+                {roomChekOut.length > 0 ? (
+                  roomChekOut.slice(0, 1).map((item, index) => (
+                    <>
                       <p>{item.nama_tamu}</p>
                       <p>{}</p>
-                      <p>{item.tgl_check_in}</p>
+                      <p>{item.tgl_check_out}</p>
                     </>
                   ))
                 ) : (
