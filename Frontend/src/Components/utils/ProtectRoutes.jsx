@@ -1,9 +1,15 @@
-import React from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import React from "react";
+import { useLocation, Navigate } from "react-router-dom";
 
-const ProtectRoutes = () => {
-    const token = localStorage.getItem("Token")
-  return token ? <Outlet/> : <Navigate to="/Login"/>
-}
+const ProtectRoutes = ({ children }) => {
+  const token = sessionStorage.getItem("Token");
+  const location = useLocation();
 
-export default ProtectRoutes
+  if (!token) {
+    return <Navigate to="/Login" state={{ from: location }} replace />;
+  }
+
+  return children;
+};
+
+export default ProtectRoutes;

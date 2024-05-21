@@ -14,5 +14,6 @@ app.get("/getcheckout",authorize, isAdmin, pemesanan.getAllCheckOut)
 app.get("/SumTransaksi", authorize, isAdmin, pemesanan.countTransaksi);
 app.get("/checkin", authorize, isAdmin, pemesanan.getCheckIn)
 app.get("/checkout", authorize, isAdmin, pemesanan.getCheckOut)
+app.get("/kamar", authorize, isAdmin, pemesanan.getKamar)
 
 module.exports = app;

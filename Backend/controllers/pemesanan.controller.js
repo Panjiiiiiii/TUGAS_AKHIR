@@ -7,7 +7,6 @@ const detailModel = require("../models/index").detail_pemesanamn;
 const kamarModel = require("../models/index").kamar;
 const Op = require("sequelize").Op;
 const express = require("express");
-const { where } = require("sequelize");
 
 const app = express();
 
@@ -245,26 +244,13 @@ exports.getCheckOut = async (req, res) => {
     });
   }
 };
-//get pemesanan (user)
 
-//add pemesanan (user)
+exports.getKamar = async (req, res) => {
+  let dataKamar = await sequelize.query(`SELECT tipe_kamars.*, kamars.id as id_kamar, kamars.nomor_kamar, kamars.status FROM tipe_kamars LEFT OUTER JOIN kamars ON tipe_kamars.id = kamars.id_tipe_kamar;`)
 
-//get nomor kamar from kamar
+  console.log(dataKamar[0]);
 
-//input pemesanan
-
-//input detail pemesanan
-
-//update pemesanan (admin) check-in -> check-out
-
-//delete pemesanan (admin)
-
-//sum total harga pemesanan (user)
-// exports.getTagihan = async (req, res) => {
-//   let id_user = req.params.id;
-
-//   let getHarga = await sequelize.query(
-//     `SELECT SUM(harga) from detail_pemesanan WHERE `
-//   );
-// };
-//best seller (user)
+  return res.json({
+    data: dataKamar[0],
+  });
+};

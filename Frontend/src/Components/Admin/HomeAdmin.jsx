@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { IoBedOutline } from "react-icons/io5";
 import axios from "axios";
+// import Header from "./Header";
+// import Sidebar from "./Sidebar";
 
-const Home = () => {
+const HomeAdmin = () => {
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
   const [checkInData, setCheckinData] = useState(0);
   const [checkOutData, setCheckoutData] = useState(0);
   const [countTransaksi, setCountTransaksi] = useState(0);
   const [roomUsed, setroomUsed] = useState([]);
-  const [roomChekOut, setRoomCheckOut] = useState([])
+  const [roomChekOut, setRoomCheckOut] = useState([]);
+
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle);
+  };
 
   const getRoomUsed = async () => {
     try {
@@ -27,7 +34,6 @@ const Home = () => {
 
       if (data) {
         setroomUsed(data);
-        console.log(data);
       }
     } catch (error) {
       console.log(error);
@@ -151,12 +157,17 @@ const Home = () => {
   };
 
   useEffect(() => {
-    countDataTransaksi()
+    countDataTransaksi();
   }, []);
 
   return (
     <>
       <main className="main-container">
+        {/* <Header OpenSidebar={OpenSidebar} />
+        <Sidebar
+          openSidebarToggle={openSidebarToggle}
+          OpenSidebar={OpenSidebar}
+        /> */}
         <div className="main-title">
           <h3>DASHBOARD</h3>
         </div>
@@ -254,4 +265,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeAdmin;
