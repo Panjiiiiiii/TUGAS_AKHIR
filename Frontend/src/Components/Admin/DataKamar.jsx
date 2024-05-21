@@ -1,17 +1,44 @@
-import React, { useState } from 'react';
-import Header from '../Admin/Header';
-import Sidebar from '../Admin/Sidebar';
-import '../../App.css'; 
-import { AiOutlineSetting, AiOutlineDelete } from 'react-icons/ai';
+import React, { useEffect, useState } from "react";
+import Header from "../Admin/Header";
+import Sidebar from "../Admin/Sidebar";
+import axios from "axios";
+import "../../App.css";
+import { AiOutlineSetting, AiOutlineDelete } from "react-icons/ai";
 
 function DataKamar() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [rooms, setRooms] = useState([
-    { id: 1, number: 101, type: 'Single', room: 'A101', status: 'Available', price: 100 },
-    { id: 2, number: 102, type: 'Double', room: 'A102', status: 'Booked', price: 150 },
-    { id: 3, number: 103, type: 'Single', room: 'A103', status: 'Available', price: 120 },
-  ]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [rooms, setRooms] = useState([]);
+
+  const getAllKamar = async () => {
+    try {
+      const token = sessionStorage.getItem("Token");
+      // console.log(token)
+      if (!token) {
+        alert("Token not found");
+      }
+
+      const url = "http://localhost:7000/pemesanan/kamar"
+      const response = await axios.get(url, {
+        headers : {
+          Authorization : `Bearer ${token}`
+        }
+      })
+      // console.log(response)
+      const data = response.data.data
+      console.log(data)
+
+      if(data){
+        setRooms(data)
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllKamar();
+  }, []);
 
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
@@ -22,18 +49,21 @@ function DataKamar() {
   };
 
   const handleAddRoom = () => {
-    console.log('Add Room button clicked');
+    console.log("Add Room button clicked");
   };
 
   const handleDeleteRoom = (id) => {
     console.log(`Room with ID ${id} deleted`);
-    setRooms(rooms.filter(room => room.id !== id));
+    setRooms(rooms.filter((room) => room.id !== id));
   };
 
   return (
-    <div className='grid-container'>
+    <div className="grid-container">
       <Header OpenSidebar={OpenSidebar} />
-      <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+      <Sidebar
+        openSidebarToggle={openSidebarToggle}
+        OpenSidebar={OpenSidebar}
+      />
 
       {/* <div className="data-kamar-options">
         <input
@@ -60,15 +90,17 @@ function DataKamar() {
           </tr>
         </thead>
         <tbody>
-          {rooms.map(room => (
-            <tr key={room.id}>
-              <td>{room.number}</td>
-              <td>{room.type}</td>
-              <td>{room.room}</td>
-              <td>{room.status}</td>
-              <td>{room.price}</td>
+          {rooms.map((item,index) => (
+            <tr key={index.id}>
+              <td>{item.id_kamar}</td>
+              <td>{item.nama_tipe_kamar}</td>
+              <td>{item.nomor_kamar}</td>
+              <td>{item.status}</td>
+              <td>{item.harga}</td>
               <td>
-                <button onClick={() => handleDeleteRoom(room.id)}><AiOutlineDelete /></button>
+                <button onClick={() => handleDeleteRoom(item.id)}>
+                  <AiOutlineDelete />
+                </button>
               </td>
             </tr>
           ))}

@@ -6,8 +6,8 @@ import AboutUs from "./Components/AboutUs/AboutUs";
 import Gallery from "./Components/Gallery/Gallery";
 import Login from "./Components/Login/Login";
 import Booking from "./Components/Booking/Booking";
-import Admin from "./Admin";
 import AdminLayout from "./Components/Layouts/Admin";
+import HomeAdmin from "./Components/Admin/HomeAdmin";
 import DataKamar from "./Components/Admin/DataKamar";
 import Transaksi from "./Components/Admin/Transaksi";
 import CheckIn from "./Components/Admin/CheckIn";
@@ -15,15 +15,21 @@ import CheckOut from "./Components/Admin/CheckOut";
 import Register from "./Components/Register/Register";
 import ProtectRoutes from "./Components/utils/ProtectRoutes";
 import "./App.css";
+import Admin from "./Components/Admin/Admin";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<UserLayout />}>
-          <Route element={<ProtectRoutes />}>
-            <Route path="/Booking" element={<Booking />} />
-          </Route>
+          <Route
+            path="/Booking"
+            element={
+              <ProtectRoutes>
+                <Booking />
+              </ProtectRoutes>
+            }
+          />
           <Route index element={<Home />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Gallery" element={<Gallery />} />
@@ -31,14 +37,47 @@ const App = () => {
           <Route path="/Register" element={<Register />} />
         </Route>
 
-        <Route element={<ProtectRoutes />}>
-          <Route path="/Admin" element={<AdminLayout />}>
-            <Route index element={<Admin />} />
-            <Route path="DataKamar" element={<DataKamar />} />
-            <Route path="Transaksi" element={<Transaksi />} />
-            <Route path="CheckIn" element={<CheckIn />} />
-            <Route path="CheckOut" element={<CheckOut />} />
-          </Route>
+        <Route path="/Admin" element={<AdminLayout />}>
+          <Route
+            index
+            element={
+              <ProtectRoutes>
+                <Admin />
+              </ProtectRoutes>
+            }
+          />
+          <Route
+            path="DataKamar"
+            element={
+              <ProtectRoutes>
+                <DataKamar />
+              </ProtectRoutes>
+            }
+          />
+          <Route
+            path="Transaksi"
+            element={
+              <ProtectRoutes>
+                <Transaksi />
+              </ProtectRoutes>
+            }
+          />
+          <Route
+            path="CheckIn"
+            element={
+              <ProtectRoutes>
+                <CheckIn />
+              </ProtectRoutes>
+            }
+          />
+          <Route
+            path="CheckOut"
+            element={
+              <ProtectRoutes>
+                <CheckOut />
+              </ProtectRoutes>
+            }
+          />
         </Route>
       </Routes>
     </Router>

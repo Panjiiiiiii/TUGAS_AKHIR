@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import Header from './Components/Admin/Header'
-import Sidebar from './Components/Admin/Sidebar'
-import Home from './Components/Admin/Home'
+import Header from './Header'
+import Sidebar from './Sidebar'
+import HomeAdmin from './HomeAdmin'
 
 function Admin() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
@@ -14,7 +14,7 @@ function Admin() {
     <div className='grid-container'>
       <Header OpenSidebar={OpenSidebar}/>
       <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
-      <Home />
+      <HomeAdmin />
     </div>
   )
 }
